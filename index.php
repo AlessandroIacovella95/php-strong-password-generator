@@ -1,23 +1,13 @@
-<?php 
+<?php
+    // Recupero il file functions.php
+    include './functions.php';
     // Controllo se il form è stato inviato
     if(isset($_GET["length"]) && $_GET["length"] !== ""){
         // Ottiengo la lunghezza desiderata della password
         $length = $_GET["length"];
-
-        // Definisco i caratteri disponibili per la password
-        $characters = 'abcdefghABCDEFGH1234567890%&$';
-
-        // Inizializza la password generata
-        $password = '';
-
-        // Genero la password casuale
-        for ($i = 0; $i < $length; $i++) {
-            $randomCharacter = $characters[rand(0, strlen($characters) - 1)];
-            $password .= $randomCharacter;
-        }
-
+        $psw = generatePassword($length);
         // Stampo la password generata
-        echo "<p>La password generata è: $password</p>";
+         echo "<div class='alert alert-success mt-3 d-flex justify-content-center' role='alert'> La Password generata è: <strong>$psw</strong></div>";
     }
 ?>
 
@@ -38,7 +28,7 @@
         <form action="index.php" method="GET">
             <label class="form-label" for="length">Inserisci la lunghezza desiderata della password:</label>
             <input class="form-control" type="number" name="length" id="length" required>
-            <button class="btn btn-success mt-3">Genera Password</button>
+            <button type="submit" class="btn btn-success mt-3">Genera Password</button>
         </form>
     </div>
 </body>
