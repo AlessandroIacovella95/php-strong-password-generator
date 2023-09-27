@@ -5,9 +5,11 @@
     if(isset($_GET["length"]) && $_GET["length"] !== ""){
         // Ottiengo la lunghezza desiderata della password
         $length = $_GET["length"];
-        $psw = generatePassword($length);
-        // Stampo la password generata
-         echo "<div class='alert alert-success mt-3 d-flex justify-content-center' role='alert'> La Password generata è: <strong>$psw</strong></div>";
+        session_start();
+        $_SESSION ['psw'] = generatePassword($length);
+       if ($_SESSION ['psw']) {
+        header('Location: ./success.php');
+       }
     }
 ?>
 
